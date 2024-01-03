@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float _speed = 3.5f;
+    [SerializeField]
+    private GameObject _laserPrefab;
 
 
 
@@ -23,10 +25,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CalculateMovement();
+        CalculatePlayerMovement();
+        //spawn game object
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+        }
     }
 
-    void CalculateMovement()
+    void CalculatePlayerMovement()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -47,4 +54,6 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(-11.3f, transform.position.y, transform.position.z);
         }
     }
+
+    
 }
