@@ -44,10 +44,7 @@ public class Enemy : MonoBehaviour
             if (player)
             {
                 player.Damage(_damage);
-            } 
-
-
-
+            }
             Destroy(gameObject); // Destroy the enemy or object this script is attached to
         }
         // If other is laser

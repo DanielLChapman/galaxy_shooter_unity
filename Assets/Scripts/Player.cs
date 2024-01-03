@@ -16,9 +16,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _fireRate = 0.25f;
     private float _canFire = -1f;
-    
+
     [SerializeField]
     private float _health = 30f;
+
+    private SpawnManager _spawnManager;
 
 
 
@@ -27,6 +29,12 @@ public class Player : MonoBehaviour
     {
         //take the current position and assign it a start position
         transform.position = new Vector3(0, 0, 0);
+
+        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+        if (!_spawnManager)
+        {
+            Debug.LogError("Spawn Manager Not Found");
+        }
     }
 
     // Update is called once per frame
@@ -40,7 +48,8 @@ public class Player : MonoBehaviour
             FireLaser();
         }
 
-        if (_health <= 0) {
+        if (_health <= 0)
+        {
             Debug.Log("Game Over");
             Destroy(this.gameObject);
         }
@@ -76,13 +85,22 @@ public class Player : MonoBehaviour
 
     }
 
-    public void Damage(float dmg) {
+    public void Damage(float dmg)
+    {
         _health -= dmg;
 
         //check if dead
-        if (_health <= 0) {
+        if (_health <= 0)
+        {
+            //communicate with spawn manager
+            if (_spawnManager)
+            {
+                _spawnManager.OnPlayerDeath();
+            }
+
+            //tell it to stop spawning
             Destroy(this.gameObject);
         }
-    } 
+    }
 
 }
