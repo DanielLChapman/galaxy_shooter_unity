@@ -121,6 +121,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &564542862
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7382085431978300219, guid: 2517fe73aec8a774d801898e63a3eb46,
+        type: 3}
+      propertyPath: m_Name
+      value: Triple_Shot_Powerup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382085431978300223, guid: 2517fe73aec8a774d801898e63a3eb46,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382085431978300223, guid: 2517fe73aec8a774d801898e63a3eb46,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382085431978300223, guid: 2517fe73aec8a774d801898e63a3eb46,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382085431978300223, guid: 2517fe73aec8a774d801898e63a3eb46,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382085431978300223, guid: 2517fe73aec8a774d801898e63a3eb46,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382085431978300223, guid: 2517fe73aec8a774d801898e63a3eb46,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382085431978300223, guid: 2517fe73aec8a774d801898e63a3eb46,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382085431978300223, guid: 2517fe73aec8a774d801898e63a3eb46,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382085431978300223, guid: 2517fe73aec8a774d801898e63a3eb46,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382085431978300223, guid: 2517fe73aec8a774d801898e63a3eb46,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382085431978300223, guid: 2517fe73aec8a774d801898e63a3eb46,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2517fe73aec8a774d801898e63a3eb46, type: 3}
 --- !u!1 &702245479
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,9 +223,11 @@ MonoBehaviour:
     type: 3}
   _waitTime: 5
   _enemyContainer: {fileID: 2112958493}
-  _tripleShotPowerup: {fileID: 7382085431978300219, guid: 2517fe73aec8a774d801898e63a3eb46,
-    type: 3}
-  _tripleShotTime: 7
+  powerups:
+  - {fileID: 3919000065335522476, guid: 315d622b66495d7479e22f7031d0d684, type: 3}
+  - {fileID: 7382085431978300219, guid: 2517fe73aec8a774d801898e63a3eb46, type: 3}
+  _powerupTimeMin: 3
+  _powerupTimeMax: 7
 --- !u!4 &702245481
 Transform:
   m_ObjectHideFlags: 0
@@ -264,6 +335,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &1644899208
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 484266513967630385, guid: 315d622b66495d7479e22f7031d0d684,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 484266513967630385, guid: 315d622b66495d7479e22f7031d0d684,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 484266513967630385, guid: 315d622b66495d7479e22f7031d0d684,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 484266513967630385, guid: 315d622b66495d7479e22f7031d0d684,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 484266513967630385, guid: 315d622b66495d7479e22f7031d0d684,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 484266513967630385, guid: 315d622b66495d7479e22f7031d0d684,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 484266513967630385, guid: 315d622b66495d7479e22f7031d0d684,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 484266513967630385, guid: 315d622b66495d7479e22f7031d0d684,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 484266513967630385, guid: 315d622b66495d7479e22f7031d0d684,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 484266513967630385, guid: 315d622b66495d7479e22f7031d0d684,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 484266513967630385, guid: 315d622b66495d7479e22f7031d0d684,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3919000065335522476, guid: 315d622b66495d7479e22f7031d0d684,
+        type: 3}
+      propertyPath: m_Name
+      value: Speed_Powerup
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 315d622b66495d7479e22f7031d0d684, type: 3}
 --- !u!1 &1715761701
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +517,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _currentSpeed: 5
   isTripleFireActive: 0
+  isSpeedActive: 0
   _laserPrefab: {fileID: 1933085458198220415, guid: bc55513573e7ce8488757ae4719c8ddc,
     type: 3}
   _tripleShotPrefab: {fileID: 7906676442874960260, guid: 4347d18fd5db48c4fb1c4c095dc1da15,

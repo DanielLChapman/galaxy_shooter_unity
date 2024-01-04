@@ -10,9 +10,14 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float _speed = 3.5f;
+    [SerializeField]
+    private float _currentSpeed = 5f;
 
     [SerializeField]
     private bool isTripleFireActive = false;
+
+    [SerializeField]
+    private bool isSpeedActive = false;
 
     [SerializeField]
     private GameObject _laserPrefab;
@@ -68,7 +73,7 @@ public class Player : MonoBehaviour
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
 
-        transform.Translate(direction * _speed * Time.deltaTime);
+        transform.Translate(direction * _currentSpeed * Time.deltaTime);
 
         //bounds
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), transform.position.z);
@@ -87,10 +92,14 @@ public class Player : MonoBehaviour
     {
 
         Vector3 position = transform.position;
+        float newFireRate = _fireRate;
+        if (isSpeedActive) {
+            newFireRate /= 2;
+        }
 
         if (isTripleFireActive)
         {
-            _canFire = Time.time + _fireRate * 1.3f;
+            _canFire = Time.time + newFireRate * 1.3f;
             // Adjust the x position by adding half of the object's width
             Vector3 tripleShotPosition = transform.position + new Vector3(0, 0, 0);
 
@@ -98,7 +107,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            _canFire = Time.time + _fireRate;
+            _canFire = Time.time + newFireRate;
 
             Instantiate(_laserPrefab, new Vector3(position.x, position.y + 1.08f, position.z), Quaternion.identity);
         }
@@ -126,17 +135,33 @@ public class Player : MonoBehaviour
     }
 
     private Coroutine _tripleShotCoroutine;
+    private Coroutine _speedCoroutine;
 
     public void ActivateSprite(string spriteType)
     {
-        if (spriteType == "Triple_Shot_Powerup")
+        switch (spriteType)
         {
-            if (_tripleShotCoroutine != null)
-            {
-                StopCoroutine(_tripleShotCoroutine);
-            }
-            _tripleShotCoroutine = StartCoroutine(ActiveTripleShot());
-        }
+            case "Triple_Shot_Powerup":
+                if (_tripleShotCoroutine != null)
+                {
+                    StopCoroutine(_tripleShotCoroutine);
+                }
+                _tripleShotCoroutine = StartCoroutine(ActiveTripleShot());
+                break;
+            case "Speed_Powerup":
+                if (_speedCoroutine != null)
+                {
+                    StopCoroutine(_speedCoroutine);
+                }
+                _speedCoroutine = StartCoroutine(ActiveSpeed());
+                break;
+            // You can have any number of case statements
+            default:
+                Debug.Log(spriteType);
+            break;
+        };
+
+
     }
 
     IEnumerator ActiveTripleShot()
@@ -144,6 +169,15 @@ public class Player : MonoBehaviour
         isTripleFireActive = true;
         yield return new WaitForSeconds(5f);
         isTripleFireActive = false;
+    }
+
+    IEnumerator ActiveSpeed()
+    {
+        _currentSpeed = 8.5f;
+        isSpeedActive = true;
+        yield return new WaitForSeconds(5f);
+        _currentSpeed = _speed;
+        isSpeedActive = false;
     }
 
 }

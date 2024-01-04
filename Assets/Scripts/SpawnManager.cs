@@ -16,17 +16,21 @@ public class SpawnManager : MonoBehaviour
 
     private bool _stopSpawning = false;
 
-    [SerializeField] 
-    private GameObject _tripleShotPowerup;
     [SerializeField]
-    private float _tripleShotTimeMin = 3f;
+    private GameObject[] powerups;
+
     [SerializeField]
-    private float _tripleShotTimeMax = 7f;
+    private float _powerupTimeMin = 3f;
+    [SerializeField]
+    private float _powerupTimeMax = 7f;
+
+
 
     void Start()
     {
-         StartCoroutine(SpawnEnemyRoutine());
-          StartCoroutine(SpawnSpriteRoutine());
+        StartCoroutine(SpawnEnemyRoutine());
+        StartCoroutine(SpawnPowerupRoutine());
+
     }
 
     // Update is called once per frame
@@ -35,16 +39,15 @@ public class SpawnManager : MonoBehaviour
       
     }
 
-    IEnumerator SpawnSpriteRoutine() {
+    IEnumerator SpawnPowerupRoutine() {
         while (!_stopSpawning) {
-            yield return new WaitForSeconds(Random.Range(_tripleShotTimeMin, _tripleShotTimeMax + 1));
-            GameObject newSprite = Instantiate(_tripleShotPowerup, new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(7.0f, 9.0f), 0), Quaternion.identity);
+             yield return new WaitForSeconds(Random.Range(_powerupTimeMin, _powerupTimeMax+1));
+            Vector3 postToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
+            int randomPowerUp = Random.Range(0, 2);
+             GameObject newSprite = Instantiate(powerups[randomPowerUp],postToSpawn, Quaternion.identity);
         }
-        
     }
 
-    //spawn game objects every 5 seconds
-    //create a coroutine of type IEnumberator -- yield events
 
     IEnumerator SpawnEnemyRoutine() {
 

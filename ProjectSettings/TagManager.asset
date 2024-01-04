@@ -10,6 +10,7 @@ TagManager:
   - Spawn_Manager
   - Triple_Shot
   - Triple_Shot_Powerup
+  - Speed_Powerup
   layers:
   - Default
   - TransparentFX
