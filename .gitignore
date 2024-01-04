@@ -9,15 +9,6 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
-/Sprites/
-/Materials/
-/Audio/
-/Animations/
-Sprites.meta
-Materials.meta
-Audio.meta
-Animations.meta
-
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
