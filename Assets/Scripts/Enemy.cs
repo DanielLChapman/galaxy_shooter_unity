@@ -5,11 +5,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
+    [SerializeField]
     private float _speed = 4f;
     // Start is called before the first frame update
-
-    [SerializeField]
-    private GameObject _enemyPrefab;
 
     [SerializeField]
     public float _damage = 10;
@@ -35,7 +33,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         // If other is player
         if (other.tag == "Player")

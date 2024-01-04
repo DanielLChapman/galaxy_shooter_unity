@@ -10,8 +10,14 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float _speed = 3.5f;
+
+    [SerializeField]
+    private bool isTripleFireActive = false;
+
     [SerializeField]
     private GameObject _laserPrefab;
+    [SerializeField]
+    private GameObject _tripleShotPrefab;
 
     [SerializeField]
     private float _fireRate = 0.25f;
@@ -43,7 +49,7 @@ public class Player : MonoBehaviour
         CalculatePlayerMovement();
         //spawn game object
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+        if (Input.GetKey(KeyCode.Space) && Time.time > _canFire)
         {
             FireLaser();
         }
@@ -80,10 +86,26 @@ public class Player : MonoBehaviour
     void FireLaser()
     {
 
-        _canFire = Time.time + _fireRate;
-        Instantiate(_laserPrefab, new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z), Quaternion.identity);
+        Vector3 position = transform.position;
 
+        if (isTripleFireActive)
+        {
+            _canFire = Time.time + _fireRate * 1.3f;
+            // Adjust the x position by adding half of the object's width
+            Vector3 tripleShotPosition = transform.position + new Vector3(0, 0, 0);
+
+            Instantiate(_tripleShotPrefab, tripleShotPosition, Quaternion.identity);
+        }
+        else
+        {
+            _canFire = Time.time + _fireRate;
+
+            Instantiate(_laserPrefab, new Vector3(position.x, position.y + 1.08f, position.z), Quaternion.identity);
+        }
     }
+
+
+
 
     public void Damage(float dmg)
     {
@@ -101,6 +123,27 @@ public class Player : MonoBehaviour
             //tell it to stop spawning
             Destroy(this.gameObject);
         }
+    }
+
+    private Coroutine _tripleShotCoroutine;
+
+    public void ActivateSprite(string spriteType)
+    {
+        if (spriteType == "Triple_Shot_Powerup")
+        {
+            if (_tripleShotCoroutine != null)
+            {
+                StopCoroutine(_tripleShotCoroutine);
+            }
+            _tripleShotCoroutine = StartCoroutine(ActiveTripleShot());
+        }
+    }
+
+    IEnumerator ActiveTripleShot()
+    {
+        isTripleFireActive = true;
+        yield return new WaitForSeconds(5f);
+        isTripleFireActive = false;
     }
 
 }

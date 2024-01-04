@@ -8,6 +8,8 @@ TagManager:
   - Laser
   - Enemy
   - Spawn_Manager
+  - Triple_Shot
+  - Triple_Shot_Powerup
   layers:
   - Default
   - TransparentFX
@@ -44,4 +46,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 438333061
     locked: 0
