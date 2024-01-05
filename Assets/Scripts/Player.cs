@@ -33,6 +33,13 @@ public class Player : MonoBehaviour
 
     private SpawnManager _spawnManager;
 
+    [SerializeField]
+    private bool _isShieldActive = false;
+
+    [SerializeField]
+    private GameObject shieldPrefab;
+    private GameObject spawnedShieldPrefab;
+
 
 
     // Start is called before the first frame update
@@ -93,7 +100,8 @@ public class Player : MonoBehaviour
 
         Vector3 position = transform.position;
         float newFireRate = _fireRate;
-        if (isSpeedActive) {
+        if (isSpeedActive)
+        {
             newFireRate /= 2;
         }
 
@@ -118,19 +126,28 @@ public class Player : MonoBehaviour
 
     public void Damage(float dmg)
     {
-        _health -= dmg;
-
-        //check if dead
-        if (_health <= 0)
+        if (_isShieldActive)
         {
-            //communicate with spawn manager
-            if (_spawnManager)
-            {
-                _spawnManager.OnPlayerDeath();
-            }
+            _isShieldActive = false;
+            Destroy(spawnedShieldPrefab);
+        }
+        else
+        {
+            
+            _health -= dmg;
 
-            //tell it to stop spawning
-            Destroy(this.gameObject);
+            // Check if dead
+            if (_health <= 0)
+            {
+                // Communicate with spawn manager
+                if (_spawnManager)
+                {
+                    _spawnManager.OnPlayerDeath();
+                }
+
+                // Tell it to stop spawning
+                Destroy(this.gameObject);
+            }
         }
     }
 
@@ -155,10 +172,17 @@ public class Player : MonoBehaviour
                 }
                 _speedCoroutine = StartCoroutine(ActiveSpeed());
                 break;
+            case "Shield_Powerup":
+                _isShieldActive = true;
+                if (spawnedShieldPrefab == null)
+                {
+                    spawnedShieldPrefab = Instantiate(shieldPrefab, transform.position, Quaternion.identity, transform);
+                }
+                break;
             // You can have any number of case statements
             default:
                 Debug.Log(spriteType);
-            break;
+                break;
         };
 
 
