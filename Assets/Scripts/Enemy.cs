@@ -11,9 +11,11 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     public float _damage = 10;
+
+    private Player _player;
     void Start()
     {
-
+        _player = GameObject.Find("Player").GetComponent<Player>();
         transform.position = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(7.0f, 9.0f), 0);
     }
 
@@ -35,6 +37,7 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+
         // If other is player
         if (other.tag == "Player")
         {
@@ -49,6 +52,14 @@ public class Enemy : MonoBehaviour
         else if (other.tag == "Laser")
         {
             Destroy(other.gameObject); // Destroy the laser
+            //add 10 to score
+            
+            if (_player)
+            {
+                _player.AddToScore(10);
+            }
+
+
             Destroy(gameObject); // Destroy the enemy or object this script is attached to
         }
 

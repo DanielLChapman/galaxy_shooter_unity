@@ -13,6 +13,7 @@ TagManager:
   - Speed_Powerup
   - Shield_Powerup
   - Shield
+  - UI_Manager
   layers:
   - Default
   - TransparentFX

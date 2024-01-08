@@ -40,6 +40,13 @@ public class Player : MonoBehaviour
     private GameObject shieldPrefab;
     private GameObject spawnedShieldPrefab;
 
+    [SerializeField]
+    private int _score = 0;
+
+    [SerializeField]
+    private UIManager uiManager;
+    
+
 
 
     // Start is called before the first frame update
@@ -52,6 +59,10 @@ public class Player : MonoBehaviour
         if (!_spawnManager)
         {
             Debug.LogError("Spawn Manager Not Found");
+        }
+
+        if (!uiManager) {
+            Debug.LogError("UI manager is null");
         }
     }
 
@@ -69,6 +80,8 @@ public class Player : MonoBehaviour
         if (_health <= 0)
         {
             Debug.Log("Game Over");
+            uiManager.UpdateScoreText(0);
+            uiManager.GameOverText();
             Destroy(this.gameObject);
         }
     }
@@ -135,6 +148,7 @@ public class Player : MonoBehaviour
         {
             
             _health -= dmg;
+            uiManager.UpdateLives((int)_health/10);
 
             // Check if dead
             if (_health <= 0)
@@ -145,6 +159,7 @@ public class Player : MonoBehaviour
                     _spawnManager.OnPlayerDeath();
                 }
 
+                uiManager.GameOverText();
                 // Tell it to stop spawning
                 Destroy(this.gameObject);
             }
@@ -202,6 +217,12 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(5f);
         _currentSpeed = _speed;
         isSpeedActive = false;
+    }
+
+    public void AddToScore(int amount) {
+        _score += amount;
+        //communicate with the UI to update the score
+        uiManager.UpdateScoreText(_score);
     }
 
 }
