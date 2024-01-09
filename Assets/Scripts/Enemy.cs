@@ -12,11 +12,29 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     public float _damage = 10;
 
+    [SerializeField]
     private Player _player;
+
+    //handle to animator component
+    private Animator _anim;
+
+    private AudioSource _audioSource;
     void Start()
     {
-        _player = GameObject.Find("Player").GetComponent<Player>();
         transform.position = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(7.0f, 9.0f), 0);
+
+        //asign the component to Anim
+        _player = GameObject.Find("Player").GetComponent<Player>();
+ 
+         _anim = GetComponent<Animator>();
+
+        if (!_anim) {
+            Debug.LogError("Anim is NULL");
+        }
+
+        _audioSource = GetComponent<AudioSource>();
+
+
     }
 
     // Update is called once per frame
@@ -46,7 +64,11 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage(_damage);
             }
-            Destroy(gameObject); // Destroy the enemy or object this script is attached to
+            //trigger animation
+            _anim.SetTrigger("OnEnemyDeath");
+            _speed = 0.1f;
+            _audioSource.Play();
+            Destroy(gameObject, 2.8f); // Destroy the enemy or object this script is attached to
         }
         // If other is laser
         else if (other.tag == "Laser")
@@ -59,8 +81,11 @@ public class Enemy : MonoBehaviour
                 _player.AddToScore(10);
             }
 
-
-            Destroy(gameObject); // Destroy the enemy or object this script is attached to
+            //trigger animation
+            _anim.SetTrigger("OnEnemyDeath");
+            _speed = 0.1f;
+            _audioSource.Play();
+            Destroy(gameObject,2.8f); // Destroy the enemy or object this script is attached to
         }
 
         //Instantiate(_enemyPrefab, new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(7.0f, 9.0f), 0), Quaternion.identity);

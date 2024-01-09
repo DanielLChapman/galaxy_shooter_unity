@@ -45,6 +45,9 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private UIManager uiManager;
+
+    [SerializeField]
+    private AudioSource _fireLaserSound;
     
 
 
@@ -132,6 +135,9 @@ public class Player : MonoBehaviour
 
             Instantiate(_laserPrefab, new Vector3(position.x, position.y + 1.08f, position.z), Quaternion.identity);
         }
+
+        //play audio
+        _fireLaserSound.Play();
     }
 
 
@@ -149,6 +155,13 @@ public class Player : MonoBehaviour
             
             _health -= dmg;
             uiManager.UpdateLives((int)_health/10);
+
+            if (_health <= 20) {
+                transform.Find("Right_Engine").gameObject.SetActive(true);
+            } 
+            if (_health <= 10) {
+                transform.Find("Left_Engine").gameObject.SetActive(true);
+            }
 
             // Check if dead
             if (_health <= 0)
